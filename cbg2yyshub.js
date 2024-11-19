@@ -1,11 +1,10 @@
 // ==UserScript==
 // @name         痒痒鼠魔方 Helper.js
 // @namespace    yyshub.top
-// @version      v1.0
+// @version      0.1-beta
 // @description  直接加载 CBG 数据到痒痒鼠魔方。
 // @license      GPT
 // @version      2024-11-19
-// @description  try to take over the world!
 // @author       清明月见
 // @homepage     http://yyshub.top/
 // @match        https://yys.cbg.163.com/*
