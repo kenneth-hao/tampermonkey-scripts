@@ -7,8 +7,8 @@
 // @author       清明月见
 // @homepage     http://yyshub.top/
 // @match        https://yys.cbg.163.com/*
-// @match        http://yyshub.top/*
 // @match        https://cbg-other-desc.res.netease.com/*
+// @match        http://yyshub.top/*
 // @iconURL      http://yyshub.top/static/img/favicon.png
 // @run-at       document-start
 // @require      https://scriptcat.org/lib/513/2.0.0/ElementGetter.js#sha256=KbLWud5OMbbXZHRoU/GLVgvIgeosObRYkDEbE/YanRU=
