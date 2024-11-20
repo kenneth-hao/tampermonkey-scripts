@@ -19,12 +19,15 @@
 // @grant        GM_saveTab
 // @grant        GM_getTabs
 // @grant        GM_openInTab
+// @downloadURL https://update.greasyfork.org/scripts/518093/%E7%97%92%E7%97%92%E9%BC%A0%E9%AD%94%E6%96%B9%20Helperjs.user.js
+// @updateURL https://update.greasyfork.org/scripts/518093/%E7%97%92%E7%97%92%E9%BC%A0%E9%AD%94%E6%96%B9%20Helperjs.meta.js
 // ==/UserScript==
 
 (function() {
     'use strict';
 
     const YYSHUB_URL = "http://yyshub.top";
+    const CBG_URL = "https://yys.cbg.163.com";
     const CBG_DESC_URL_MATCH = "/cgi/api/get_equip_desc";
     const KEY_OF_CBG_DATA = "cbg_data";
 
@@ -32,22 +35,26 @@
     console.log('load Tampermonkey of 痒痒鼠魔方 Helper');
 
     GM_getTab(function(tab) {
+        console.log('tab', tab);
         tab.href = unsafeWindow.location.href;
         GM_saveTab(tab);
     });
 
-    GM_getTabs((tabs) => {
-        let isOpenYyshub = false;
-        for (const [tabId, tab] of Object.entries(tabs)) {
-            if (tab?.href?.startsWith(YYSHUB_URL)) {
-                isOpenYyshub = true
+    if (unsafeWindow.location.href.startsWith(CBG_URL)) {
+        GM_getTabs((tabs) => {
+            console.log('getTabs', tabs);
+            let isOpenYyshub = false;
+            for (const [tabId, tab] of Object.entries(tabs)) {
+                if (tab?.href?.startsWith(YYSHUB_URL)) {
+                    isOpenYyshub = true
+                }
             }
-        }
 
-        if (!isOpenYyshub) {
-           GM_openInTab(YYSHUB_URL, { active: false, insert: true, setParent :true })
-        }
-    });
+            if (!isOpenYyshub) {
+                GM_openInTab(YYSHUB_URL, { active: false, insert: true, setParent :true })
+            }
+        });
+    }
 
     GM_addValueChangeListener(KEY_OF_CBG_DATA, function(name, old_value, new_value, remote) {
         if (remote && new_value) {
