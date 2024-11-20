@@ -28,6 +28,7 @@
 
     const YYSHUB_URL = "http://yyshub.top";
     const CBG_URL = "https://yys.cbg.163.com";
+    const CBG_DETAIL_URL_MATCH = "/cgi/api/get_equip_detail";
     const CBG_DESC_URL_MATCH = "/cgi/api/get_equip_desc";
     const KEY_OF_CBG_DATA = "cbg_data";
 
@@ -35,14 +36,12 @@
     console.log('load Tampermonkey of 痒痒鼠魔方 Helper');
 
     GM_getTab(function(tab) {
-        console.log('tab', tab);
         tab.href = unsafeWindow.location.href;
         GM_saveTab(tab);
     });
 
     if (unsafeWindow.location.href.startsWith(CBG_URL)) {
         GM_getTabs((tabs) => {
-            console.log('getTabs', tabs);
             let isOpenYyshub = false;
             for (const [tabId, tab] of Object.entries(tabs)) {
                 if (tab?.href?.startsWith(YYSHUB_URL)) {
@@ -51,7 +50,7 @@
             }
 
             if (!isOpenYyshub) {
-                GM_openInTab(YYSHUB_URL, { active: false, insert: true, setParent :true })
+                GM_openInTab(YYSHUB_URL + '/#/yuhun/list', { active: false, insert: true, setParent :true })
             }
         });
     }
@@ -67,25 +66,40 @@
         }
     })
 
+    const loadMofang = (data) => {
+        elmGetter.get('.site-navbar .right')
+        .then(navbar => {
+            let b = document.createElement('a');
+            b.innerText = "# 魔方 #";
+            b.title = "如果有帮到你，可以请作者喝一杯咖啡 ☕️";
+            b.className = "navbar-menu";
+            b.id = "mofang"
+            b.style.cursor = "pointer";
+            b.style.color = "rgb(236, 209, 107)";
+            b.onclick = function() {
+                GM_setValue(KEY_OF_CBG_DATA, data) // open close
+            }
+            navbar.insertBefore(b, navbar.children[0]);
+        });
+    }
+
     ajaxHooker.hook(request => {
         if (request.url.startsWith(CBG_DESC_URL_MATCH)) {
             request.response = res => {
                 if (res.status == 200) {
-                    elmGetter.get('.site-navbar .right')
-                        .then(navbar => {
-                            let b = document.createElement('a');
-                            b.innerText = "# 魔方 #";
-                            b.className = "navbar-menu";
-                            b.id = "mofang"
-                            b.style.cursor = "pointer";
-                            b.style.color = "#AAA";
-                            b.onclick = function() {
-                                GM_setValue(KEY_OF_CBG_DATA, res.json) // open close
-                            }
-                            navbar.insertBefore(b, navbar.children[0]);
-                        });
+                    loadMofang(res.json)
                 }
             };
+        }
+        if (request.url.startsWith(CBG_DETAIL_URL_MATCH)) {
+            request.response = res => {
+                if (res.status == 200) {
+                    const data = JSON.parse(res.responseText)
+                    if (data?.equip?.equip_desc) {
+                        loadMofang(data)
+                    }
+                }
+            }
         }
     })
 })();
