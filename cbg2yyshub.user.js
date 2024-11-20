@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         痒痒鼠魔方 Helper.js
 // @namespace    yyshub.top
-// @version      0.1-beta
 // @description  直接加载 CBG 数据到痒痒鼠魔方。
 // @license      GPT
-// @version      2024-11-19
+// @version      2024-11-20
 // @author       清明月见
 // @homepage     http://yyshub.top/
 // @match        https://yys.cbg.163.com/*
 // @match        http://yyshub.top/*
+// @match        https://cbg-other-desc.res.netease.com/*
 // @iconURL      http://yyshub.top/static/img/favicon.png
 // @run-at       document-start
 // @require      https://scriptcat.org/lib/513/2.0.0/ElementGetter.js#sha256=KbLWud5OMbbXZHRoU/GLVgvIgeosObRYkDEbE/YanRU=
@@ -26,7 +26,7 @@
 
     const YYSHUB_URL = "http://yyshub.top";
     // const YYSHUB_URL = "http://192.168.3.156:5173";
-    const CBG_URL_MATCH = "api/get_equip_detail";
+    const CBG_URL_MATCH = "yys/static/equipdesc";
     const KEY_OF_CBG_DATA = "cbg_data";
 
     // Your code here...
