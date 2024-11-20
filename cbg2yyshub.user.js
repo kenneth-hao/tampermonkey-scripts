@@ -33,7 +33,6 @@
 
     // Your code here...
     console.log('load Tampermonkey of 痒痒鼠魔方 Helper');
-    console.log('test webhook3')
 
     GM_getTab(function(tab) {
         console.log('tab', tab);
