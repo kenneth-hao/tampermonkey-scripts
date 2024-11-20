@@ -19,8 +19,6 @@
 // @grant        GM_saveTab
 // @grant        GM_getTabs
 // @grant        GM_openInTab
-// @downloadURL none
-// @updateURL none
 // ==/UserScript==
 
 (function() {
