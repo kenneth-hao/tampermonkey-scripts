@@ -67,22 +67,28 @@
     })
 
     const loadMofang = (data) => {
-        elmGetter.get('.site-navbar .right .navbar-menu')
-        .then(navbarMenu => {
-            let b = document.createElement('a');
-            b.innerText = "# 魔方 #";
-            b.title = "如果有帮到你，可以请作者喝一杯咖啡 ☕️";
-            b.className = "navbar-menu";
-            b.id = "mofang"
-            b.style.cursor = "pointer";
-            b.style.color = "rgb(236, 209, 107)";
-            b.onclick = function() {
-                GM_setValue(KEY_OF_CBG_DATA, data) // open close
-            }
-            const navbar = navbarMenu.parentElement;
-            navbar.insertBefore(b, navbar.children[0]);
-            console.log('loadMofang inject success')
-        });
+        if (data) {
+            elmGetter.get('.site-navbar .right .navbar-menu')
+                .then(navbarMenu => {
+                    // 安装 CBG Helper.js 的情况下, 会重复获取御魂数据
+                    // 这里做下兜底
+                    if (!document.getElementById('mofang')) {
+                        let b = document.createElement('a');
+                        b.innerText = "# 魔方 #";
+                        b.title = "如果有帮到你，可以请作者喝一杯咖啡 ☕️";
+                        b.className = "navbar-menu";
+                        b.id = "mofang"
+                        b.style.cursor = "pointer";
+                        b.style.color = "rgb(236, 209, 107)";
+                        b.onclick = function() {
+                            GM_setValue(KEY_OF_CBG_DATA, data) // open close
+                        }
+                        const navbar = navbarMenu.parentElement;
+                        navbar.insertBefore(b, navbar.children[0]);
+                        console.log('# 魔方 # inject success')
+                    }
+                });
+        }
     }
 
     ajaxHooker.hook(request => {
