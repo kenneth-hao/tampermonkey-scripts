@@ -67,8 +67,8 @@
     })
 
     const loadMofang = (data) => {
-        elmGetter.get('.site-navbar .right')
-        .then(navbar => {
+        elmGetter.get('.site-navbar .right .navbar-menu')
+        .then(navbarMenu => {
             let b = document.createElement('a');
             b.innerText = "# 魔方 #";
             b.title = "如果有帮到你，可以请作者喝一杯咖啡 ☕️";
@@ -79,7 +79,9 @@
             b.onclick = function() {
                 GM_setValue(KEY_OF_CBG_DATA, data) // open close
             }
+            const navbar = navbarMenu.parentElement;
             navbar.insertBefore(b, navbar.children[0]);
+            console.log('loadMofang inject success')
         });
     }
 
