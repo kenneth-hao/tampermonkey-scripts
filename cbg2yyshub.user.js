@@ -32,7 +32,6 @@
     const CBG_DESC_URL_MATCH = "/cgi/api/get_equip_desc";
     const KEY_OF_CBG_DATA = "cbg_data";
 
-    // Your code here...
     console.log('load Tampermonkey of 痒痒鼠魔方 Helper');
 
     GM_getTab(function(tab) {
