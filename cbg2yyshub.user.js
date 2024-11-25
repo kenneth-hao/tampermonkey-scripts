@@ -10,8 +10,8 @@
 // @match        https://yys.cbg.163.com/*
 // @match        http://yyshub.top/*
 // @run-at       document-start
-// @require      https://scriptcat.org/lib/513/2.0.0/ElementGetter.js#sha256=KbLWud5OMbbXZHRoU/GLVgvIgeosObRYkDEbE/YanRU=
-// @require      https://scriptcat.org/lib/637/1.4.3/ajaxHooker.js#sha256=y1sWy1M/U5JP1tlAY5e80monDp27fF+GMRLsOiIrSUY=
+// @require      https://update.greasyfork.org/scripts/448197/1478721/ElementGetter20.js
+// @require      https://update.greasyfork.org/scripts/455943/1270016/ajaxHooker.js
 // @grant        unsafeWindow
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
