@@ -11,7 +11,7 @@
 // @match        http://yyshub.top/*
 // @run-at       document-start
 // @require      https://update.greasyfork.org/scripts/448197/1478721/ElementGetter20.js
-// @require      https://update.greasyfork.org/scripts/455943/1270016/ajaxHooker.js
+// @require      https://update.greasyfork.org/scripts/465643/1421695/ajaxHookerLatest.js
 // @grant        unsafeWindow
 // @grant        GM_setValue
 // @grant        GM_addValueChangeListener
