@@ -40,18 +40,27 @@
     });
 
     if (unsafeWindow.location.href.startsWith(CBG_URL)) {
-        GM_getTabs((tabs) => {
-            let isOpenYyshub = false;
-            for (const [tabId, tab] of Object.entries(tabs)) {
-                if (tab?.href?.startsWith(YYSHUB_URL)) {
-                    isOpenYyshub = true
+        let checkTimeout;
+        clearTimeout(checkTimeout);
+        checkTimeout = setTimeout(() => {
+            GM_getTabs((tabs) => {
+                let isOpenYyshub = false;
+                for (const [tabId, tab] of Object.entries(tabs)) {
+                    if (tab?.href?.includes(YYSHUB_URL)) {
+                        isOpenYyshub = true;
+                        break; 
+                    }
                 }
-            }
-
-            if (!isOpenYyshub) {
-                GM_openInTab(YYSHUB_URL + '/#/yuhun/list', { active: false, insert: true, setParent :true })
-            }
-        });
+    
+                if (!isOpenYyshub) {
+                    GM_openInTab(YYSHUB_URL + '/#/yuhun/list', { 
+                        active: false, 
+                        insert: true, 
+                        setParent: true 
+                    });
+                }
+            });
+        }, 500); // 500ms 的防抖延时
     }
 
     GM_addValueChangeListener(KEY_OF_CBG_DATA, function(name, old_value, new_value, remote) {
