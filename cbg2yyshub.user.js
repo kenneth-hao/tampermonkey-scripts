@@ -3,7 +3,7 @@
 // @namespace    yyshub.top
 // @description  直接加载 CBG 数据到痒痒鼠魔方。
 // @license      GPT
-// @version      2024-11-26
+// @version      2024-11-29
 // @author       清明月见
 // @homepage     http://yyshub.top/
 // @iconURL      http://yyshub.top/static/img/favicon.png
