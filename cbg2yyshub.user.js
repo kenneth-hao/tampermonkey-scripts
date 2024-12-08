@@ -3,8 +3,8 @@
 // @namespace    yyshub.top
 // @description  直接加载 CBG 数据到痒痒鼠魔方。
 // @license      GPT
-// @version      2024-12-01
-// @author       清明月见
+// @version      2024-12-08
+// @author       清明月见 & LingErEd
 // @homepage     http://yyshub.top/
 // @iconURL      http://yyshub.top/static/img/favicon.png
 // @match        https://yys.cbg.163.com/*
@@ -74,11 +74,14 @@
     if (unsafeWindow.location.href.startsWith(CBG_URL)) {
         console.log('load 4 CBG');
         ajaxHooker.hook(request => {
+            let originalResponse = request.response;
             if (request.url.startsWith(CBG_DESC_URL_MATCH)) {
                 request.response = res => {
                     if (res.status == 200) {
                         loadMofang(res.json)
                     }
+                    // 用于兼容 CBGHelper.js from LingErEd
+                    if(originalResponse) try {originalResponse.apply(this, [res]);} catch (error) {}
                 };
             }
             if (request.url.startsWith(CBG_DETAIL_URL_MATCH)) {
@@ -89,6 +92,8 @@
                             loadMofang(data)
                         }
                     }
+                    // 用于兼容 CBGHelper.js from LingErEd
+                    if(originalResponse) try {originalResponse.apply(this, [res]);} catch (error) {}
                 }
             }
         })
