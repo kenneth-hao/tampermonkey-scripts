@@ -3,13 +3,13 @@
 // @namespace    yyshub.top
 // @description  直接加载 CBG 数据到痒痒鼠魔方。
 // @license      GPT
-// @version      2024-12-08
+// @version      2025-01-06
 // @author       清明月见 & LingErEd
 // @homepage     http://yyshub.top/
 // @iconURL      http://yyshub.top/static/img/favicon.png
 // @match        https://yys.cbg.163.com/*
 // @match        http://yyshub.top/*
-// @run-at       document-start
+// @run-at       document-idle
 // @require      https://update.greasyfork.org/scripts/448197/1478721/ElementGetter20.js
 // @require      https://update.greasyfork.org/scripts/465643/1421695/ajaxHookerLatest.js
 // @grant        unsafeWindow
@@ -29,6 +29,7 @@
     const KEY_OF_CBG_DATA = "cbg_data";
 
     console.log('load Tampermonkey of 痒痒鼠魔方 Helper');
+    GM_setValue(KEY_OF_CBG_DATA, '');
 
     if (unsafeWindow.location.href.startsWith(YYSHUB_URL)) {
         console.log('load 4 YYSHub');
